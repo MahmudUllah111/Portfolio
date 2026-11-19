@@ -51,8 +51,15 @@ export default {
         'radar': 'radar 2.5s cubic-bezier(0, 0, 0.2, 1) infinite',
         'marquee': 'marquee 35s linear infinite',
         'marquee-reverse': 'marquee-reverse 35s linear infinite',
+        'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
+        'spin-slow': 'spin 20s linear infinite',
       },
       keyframes: {
+        'border-beam': {
+          '100%': {
+            'offset-distance': '100%',
+          },
+        },
         radar: {
           '0%': { transform: 'scale(1)', opacity: '0.8' },
           '100%': { transform: 'scale(2.5)', opacity: '0' },

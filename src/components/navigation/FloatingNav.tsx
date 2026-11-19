@@ -56,7 +56,7 @@ export const FloatingNav: React.FC = () => {
       >
         <nav
           aria-label="Main Navigation"
-          className="flex items-center justify-between w-full max-w-4xl px-4 md:px-6 py-2.5 md:py-3 rounded-full bg-obsidian-surface/80 border border-white/10 backdrop-blur-xl shadow-subtle-elevation transition-all duration-300"
+          className="flex items-center justify-between w-full max-w-5xl px-4 md:px-6 py-2.5 md:py-3 rounded-full bg-obsidian-surface/80 border border-white/10 backdrop-blur-xl shadow-subtle-elevation transition-all duration-300"
         >
           {/* Logo / Monogram */}
           <a

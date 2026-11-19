@@ -60,15 +60,15 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({ item }) => {
           </div>
 
           {/* Description */}
-          <p className="text-sm text-typography-secondary leading-relaxed">
+          <p className="text-base text-typography-secondary leading-relaxed">
             {item.description}
           </p>
 
           {/* Bullet Highlights */}
-          <div className="space-y-2 pt-2">
+          <div className="space-y-2.5 pt-2">
             {item.highlights.map((highlight, idx) => (
-              <div key={idx} className="flex items-start gap-2 text-xs text-typography-secondary">
-                <span className="w-1 h-1 rounded-full bg-accent-cyan/70 flex-shrink-0 mt-1.5" />
+              <div key={idx} className="flex items-start gap-2.5 text-sm text-typography-secondary">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan flex-shrink-0 mt-2" />
                 <span className="leading-relaxed">{highlight}</span>
               </div>
             ))}
@@ -76,11 +76,11 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({ item }) => {
 
           {/* Tech Badges */}
           {item.technologies && (
-            <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/5">
+            <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5">
               {item.technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="px-2.5 py-0.5 rounded-full bg-white/5 font-mono text-[10px] text-typography-muted"
+                  className="px-3 py-1 rounded-full bg-white/5 border border-white/5 font-mono text-xs text-typography-muted"
                 >
                   {tech}
                 </span>

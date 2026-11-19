@@ -15,7 +15,6 @@ export const ExperienceTimeline: React.FC = () => {
       const rect = container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // Calculate how far the container has been scrolled through
       const start = rect.top - windowHeight * 0.75;
       const total = rect.height;
 
@@ -33,23 +32,23 @@ export const ExperienceTimeline: React.FC = () => {
   }, []);
 
   return (
-    <section id="experience" className="py-24 md:py-32 px-6 md:px-12 max-w-5xl mx-auto w-full">
-      {/* Header */}
+    <section id="experience" className="py-24 md:py-32 px-4 sm:px-6 md:px-8 max-w-[1380px] w-[92%] mx-auto">
+      {/* Header with Monospace Index Tag */}
       <div className="flex flex-col items-start gap-3 mb-16">
         <div className="flex items-center gap-2 text-accent-cyan font-mono text-xs uppercase tracking-widest">
           <History className="w-3.5 h-3.5" strokeWidth={1.5} />
-          <span>Track Record &amp; Foundation</span>
+          <span>04 // TIMELINE &amp; CAREER RECORD</span>
         </div>
-        <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight text-typography-primary">
+        <h2 className="font-display font-bold text-[clamp(2.25rem,4vw,3.75rem)] leading-[1.05] tracking-tight text-typography-primary">
           Experience &amp; Education
         </h2>
-        <p className="text-typography-secondary text-base md:text-lg max-w-xl">
-          Professional development milestones in enterprise CRM, client platforms, and computer science research.
+        <p className="text-typography-secondary text-base md:text-lg max-w-2xl leading-relaxed">
+          Professional engineering milestones spanning enterprise CRM systems, client platforms, and computer science thesis research.
         </p>
       </div>
 
       {/* Timeline Spine and Items */}
-      <div ref={containerRef} className="relative">
+      <div ref={containerRef} className="relative max-w-4xl">
         {/* Background inactive vertical track */}
         <div
           aria-hidden="true"
