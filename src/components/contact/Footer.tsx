@@ -167,18 +167,20 @@ export const Footer: React.FC = () => {
         {/* Bottom Architectural Vector Wordmark (Scales 100% width, NEVER clips) */}
         <div className="w-full py-8 sm:py-12 flex justify-center items-center overflow-hidden">
           <svg
-            viewBox="0 0 1400 160"
-            className="w-full h-auto overflow-visible text-white/[0.06] hover:text-white/[0.1] transition-colors duration-700 pointer-events-none select-none"
+            viewBox="0 0 2000 160"
+            className="w-full h-auto text-white/[0.06] hover:text-white/[0.1] transition-colors duration-700 pointer-events-none select-none"
             aria-hidden="true"
           >
             <text
               x="50%"
               y="125"
               textAnchor="middle"
+              textLength="1800"
+              lengthAdjust="spacingAndGlyphs"
               fontFamily="Syne, Space Grotesk, sans-serif"
               fontWeight="900"
-              fontSize="135"
-              letterSpacing="-2"
+              fontSize="125"
+              letterSpacing="-1"
               fill="currentColor"
             >
               MAHMUD ULLAH

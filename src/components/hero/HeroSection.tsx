@@ -75,13 +75,13 @@ export const HeroSection: React.FC = () => {
         </motion.div>
 
         {/* 3D Perspective Split-Text Animated Headline (Zero AI Gradient Text) */}
-        <div className="space-y-1">
+        <div className="space-y-1 w-full overflow-hidden">
           <PerspectiveHeading
             as="h1"
             text="A.F.M Mahmud Ullah"
             triggerOnScroll={false}
             delay={0.15}
-            className="font-display font-extrabold text-[clamp(3.5rem,8.5vw,8.5rem)] leading-[0.92] tracking-[-0.04em] text-typography-primary uppercase"
+            className="font-display font-extrabold text-[clamp(2.35rem,8.5vw,8.5rem)] leading-[0.95] tracking-[-0.04em] text-typography-primary uppercase"
           />
         </div>
 
