@@ -36,7 +36,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-obsidian-void/80 backdrop-blur-md"
+            className="fixed inset-0 bg-obsidian-void/85 backdrop-blur-md"
             aria-hidden="true"
           />
 
@@ -55,7 +55,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             <div>
               <div className="flex items-center justify-between pb-6 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 font-mono text-[11px] uppercase tracking-wider text-accent-cyan">
+                  <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 font-mono text-[11px] uppercase tracking-wider text-typography-secondary">
                     {project.category}
                   </span>
                   <span className="font-mono text-xs text-typography-muted">
@@ -65,7 +65,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
                 <button
                   onClick={onClose}
-                  className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-typography-secondary hover:text-typography-primary hover:bg-white/10 transition-colors"
+                  className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-typography-secondary hover:text-typography-primary hover:bg-white/10 transition-colors cursor-pointer"
                   aria-label="Close modal"
                 >
                   <X className="w-5 h-5" strokeWidth={1.5} />
@@ -73,28 +73,37 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               </div>
 
               {/* Title & Subtitle */}
-              <div className="mt-8 mb-6 space-y-2">
+              <div className="mt-8 mb-4 space-y-1">
                 <h3
                   id="modal-project-title"
                   className="font-display font-bold text-3xl md:text-4xl text-typography-primary tracking-tight"
                 >
                   {project.title}
                 </h3>
-                <p className="font-mono text-sm text-accent-cyan">
+                <p className="font-mono text-xs sm:text-sm text-typography-muted">
                   {project.subtitle}
                 </p>
+              </div>
+
+              {/* High-Resolution Project Photography */}
+              <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden my-6 border border-white/10 bg-obsidian-void">
+                <img
+                  src={project.imageUrl}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
               </div>
 
               {/* Status Pill */}
               <div className="mb-8">
                 {project.isPrivate ? (
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono text-xs">
-                    <Lock className="w-3.5 h-3.5" strokeWidth={1.5} />
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 text-typography-secondary font-mono text-xs">
+                    <Lock className="w-3.5 h-3.5 text-amber-400" strokeWidth={1.5} />
                     <span>Private Client / Enterprise Repository (Protected Under NDA)</span>
                   </div>
                 ) : (
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-mono text-xs">
-                    <ShieldCheck className="w-3.5 h-3.5" strokeWidth={1.5} />
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" strokeWidth={1.5} />
                     <span>Public / Open-Source Repository Available</span>
                   </div>
                 )}
@@ -122,7 +131,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 <h4 className="font-mono text-xs uppercase tracking-wider text-typography-muted">
                   System Overview
                 </h4>
-                <p className="text-typography-secondary leading-relaxed text-sm md:text-base">
+                <p className="text-typography-secondary leading-relaxed text-sm md:text-base font-normal">
                   {project.overview}
                 </p>
               </div>
@@ -132,10 +141,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 <h4 className="font-mono text-xs uppercase tracking-wider text-typography-muted">
                   Architectural Pillars
                 </h4>
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   {project.architecture.map((item, i) => (
                     <div key={i} className="flex items-start gap-2.5 text-sm text-typography-secondary">
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan flex-shrink-0 mt-2" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/40 flex-shrink-0 mt-2" />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -147,10 +156,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 <h4 className="font-mono text-xs uppercase tracking-wider text-typography-muted">
                   Key Technical Features
                 </h4>
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   {project.keyFeatures.map((item, i) => (
                     <div key={i} className="flex items-start gap-2.5 text-sm text-typography-secondary">
-                      <CheckCircle className="w-4 h-4 text-accent-indigo flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+                      <CheckCircle className="w-4 h-4 text-white/50 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -167,7 +176,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5"
+                  className="px-6 py-3 text-xs uppercase tracking-wider"
                 >
                   <span className="flex items-center gap-2">
                     <Github className="w-4 h-4" strokeWidth={1.5} />
@@ -177,7 +186,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               ) : (
                 <div className="font-mono text-xs text-typography-muted flex items-center gap-2">
                   <Lock className="w-3.5 h-3.5 text-typography-muted" strokeWidth={1.5} />
-                  <span>Code available on confidential demonstration</span>
+                  <span>Code demonstrated confidentially on request</span>
                 </div>
               )}
 
@@ -188,7 +197,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5"
+                  className="px-6 py-3 text-xs uppercase tracking-wider"
                 >
                   <span className="flex items-center gap-2">
                     <ExternalLink className="w-4 h-4" strokeWidth={1.5} />

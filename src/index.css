@@ -4,24 +4,24 @@
 
 @layer base {
   :root {
-    --bg-obsidian: #050508;
-    --bg-surface: #0C0C12;
-    --color-accent-cyan: #00F0FF;
-    --color-accent-indigo: #6366F1;
+    --bg-obsidian: #08080A;
+    --bg-surface: #111114;
+    --text-primary: #F5F5F7;
+    --text-secondary: #A1A1AA;
   }
 
   html {
     color-scheme: dark;
-    background-color: #050508;
+    background-color: #08080A;
   }
 
-  /* Custom subtle obsidian scrollbar */
+  /* Custom subtle scrollbar */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #050508;
+    background: #08080A;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -30,34 +30,27 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 240, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
   }
 }
 
 @layer utilities {
-  /* Doppelrand Double-Bezel helper */
-  .double-bezel {
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
-  }
-
-  /* Glass backdrop */
-  .glass-panel {
-    background: rgba(12, 12, 18, 0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+  /* Architectural hairline borders */
+  .hairline-border {
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  /* Text glow */
-  .text-glow-cyan {
-    text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+  .hairline-bottom {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .hairline-top {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   /* Hardware acceleration */
   .gpu-accelerated {
     transform: translateZ(0);
     backface-visibility: hidden;
-    perspective: 1000px;
   }
 }

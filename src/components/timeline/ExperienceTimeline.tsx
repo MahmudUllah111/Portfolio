@@ -1,73 +1,84 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { History } from 'lucide-react';
+import React from 'react';
 import { EXPERIENCES } from '../../data/experience';
-import { TimelineItem } from './TimelineItem';
 
 export const ExperienceTimeline: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [lineHeight, setLineHeight] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const container = containerRef.current;
-      if (!container) return;
-
-      const rect = container.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      const start = rect.top - windowHeight * 0.75;
-      const total = rect.height;
-
-      if (start < 0) {
-        const progress = Math.min(1, Math.max(0, -start / total));
-        setLineHeight(progress * 100);
-      } else {
-        setLineHeight(0);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <section id="experience" className="py-24 md:py-32 px-4 sm:px-6 md:px-8 max-w-[1380px] w-[92%] mx-auto">
-      {/* Header with Monospace Index Tag */}
-      <div className="flex flex-col items-start gap-3 mb-16">
-        <div className="flex items-center gap-2 text-accent-cyan font-mono text-xs uppercase tracking-widest">
-          <History className="w-3.5 h-3.5" strokeWidth={1.5} />
-          <span>04 // TIMELINE &amp; CAREER RECORD</span>
+    <section id="experience" className="py-28 md:py-36 px-4 sm:px-6 md:px-8 max-w-[1380px] w-[92%] mx-auto select-none">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-white/10 mb-6">
+        <div className="flex flex-col items-start gap-3">
+          <div className="flex items-center gap-2 text-typography-muted font-mono text-xs uppercase tracking-widest">
+            <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+            <span>04 // TIMELINE &amp; CAREER RECORD</span>
+          </div>
+          <h2 className="font-display font-bold text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.98] tracking-tight text-typography-primary uppercase">
+            Experience &amp; Education
+          </h2>
         </div>
-        <h2 className="font-display font-bold text-[clamp(2.25rem,4vw,3.75rem)] leading-[1.05] tracking-tight text-typography-primary">
-          Experience &amp; Education
-        </h2>
-        <p className="text-typography-secondary text-base md:text-lg max-w-2xl leading-relaxed">
-          Professional engineering milestones spanning enterprise CRM systems, client platforms, and computer science thesis research.
+        <p className="text-typography-secondary text-base md:text-lg max-w-md leading-relaxed font-normal">
+          Engineering track record in enterprise systems, dynamic client platforms, and computer science research.
         </p>
       </div>
 
-      {/* Timeline Spine and Items */}
-      <div ref={containerRef} className="relative max-w-4xl">
-        {/* Background inactive vertical track */}
-        <div
-          aria-hidden="true"
-          className="absolute left-0 top-3 bottom-0 w-[2px] bg-white/10 -translate-x-1/2"
-        />
+      {/* Full-Width Interactive Editorial List (dennissnellenberg / rauno inspired) */}
+      <div className="divide-y divide-white/10 border-b border-white/10">
+        {EXPERIENCES.map((item, index) => (
+            <div
+              key={item.id}
+              className="group relative grid grid-cols-1 lg:grid-cols-12 py-10 md:py-14 gap-8 items-start hover:bg-white/[0.015] px-4 -mx-4 rounded-xl transition-all duration-300"
+            >
+              {/* Left Column: Role & Company (Col 4) */}
+              <div className="lg:col-span-4 flex flex-col gap-2">
+                <span className="font-mono text-xs text-typography-muted">
+                  0{index + 1} //
+                </span>
+                <h3 className="font-display font-bold text-2xl md:text-3xl text-typography-primary tracking-tight group-hover:text-white transition-colors">
+                  {item.role}
+                </h3>
+                <p className="font-mono text-sm text-typography-secondary font-medium">
+                  {item.company}
+                </p>
+              </div>
 
-        {/* Dynamic Glowing Active Progress Line */}
-        <div
-          aria-hidden="true"
-          className="absolute left-0 top-3 w-[2px] bg-gradient-to-b from-accent-cyan via-accent-indigo to-accent-cyan -translate-x-1/2 shadow-glow-cyan transition-all duration-150"
-          style={{ height: `${lineHeight}%` }}
-        />
+              {/* Center Column: Impact Description & Highlights (Col 5) */}
+              <div className="lg:col-span-5 space-y-4">
+                <p className="text-base text-typography-secondary leading-relaxed font-normal">
+                  {item.description}
+                </p>
 
-        {/* Timeline Items */}
-        <div className="flex flex-col">
-          {EXPERIENCES.map((item, index) => (
-            <TimelineItem key={item.id} item={item} index={index} />
+                <div className="space-y-2 pt-2">
+                  {item.highlights.map((highlight, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-typography-muted">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/30 flex-shrink-0 mt-2" />
+                      <span className="leading-relaxed">{highlight}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {item.technologies && (
+                  <div className="flex flex-wrap gap-1.5 pt-4">
+                    {item.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-0.5 rounded-md bg-white/[0.03] border border-white/10 font-mono text-[11px] text-typography-muted"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Right Column: Period & Location (Col 3) */}
+              <div className="lg:col-span-3 flex lg:flex-col items-center lg:items-end justify-between lg:justify-start gap-2 font-mono text-xs text-typography-muted">
+                <span className="text-typography-primary font-medium">{item.period}</span>
+                <span className="text-typography-muted">{item.location}</span>
+                <span className="mt-4 hidden lg:inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] uppercase tracking-wider text-typography-secondary">
+                  {item.type}
+                </span>
+              </div>
+            </div>
           ))}
-        </div>
       </div>
     </section>
   );

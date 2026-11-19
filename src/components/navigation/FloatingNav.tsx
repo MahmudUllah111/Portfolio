@@ -56,20 +56,20 @@ export const FloatingNav: React.FC = () => {
       >
         <nav
           aria-label="Main Navigation"
-          className="flex items-center justify-between w-full max-w-5xl px-4 md:px-6 py-2.5 md:py-3 rounded-full bg-obsidian-surface/80 border border-white/10 backdrop-blur-xl shadow-subtle-elevation transition-all duration-300"
+          className="flex items-center justify-between w-full max-w-5xl px-4 md:px-6 py-2.5 md:py-3 rounded-full bg-obsidian-surface/90 border border-white/10 backdrop-blur-xl shadow-subtle-elevation transition-all duration-300"
         >
           {/* Logo / Monogram */}
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, '#hero')}
-            className="flex items-center gap-1 group font-display font-bold text-lg md:text-xl tracking-tighter text-typography-primary"
+            className="flex items-center gap-1.5 group font-display font-bold text-lg md:text-xl tracking-tighter text-typography-primary cursor-pointer"
           >
             <span>MAHMUD</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan shadow-glow-cyan animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-white/50" />
           </a>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-1 bg-obsidian/40 border border-white/5 rounded-full px-2 py-1">
+          <div className="hidden md:flex items-center gap-1 bg-black/40 border border-white/5 rounded-full px-2 py-1">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.href.replace('#', '');
               return (
@@ -77,14 +77,14 @@ export const FloatingNav: React.FC = () => {
                   key={item.label}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`relative px-4 py-1.5 text-xs font-medium tracking-wide uppercase transition-colors duration-200 rounded-full ${
+                  className={`relative px-4 py-1.5 text-xs font-mono tracking-wide uppercase transition-colors duration-200 rounded-full cursor-pointer ${
                     isActive
-                      ? 'text-accent-cyan font-semibold'
+                      ? 'text-typography-primary font-semibold'
                       : 'text-typography-secondary hover:text-typography-primary'
                   }`}
                 >
                   {isActive && (
-                    <span className="absolute inset-0 rounded-full bg-white/5 border border-white/10 -z-10" />
+                    <span className="absolute inset-0 rounded-full bg-white/10 border border-white/15 -z-10" />
                   )}
                   {item.label}
                 </a>
@@ -97,9 +97,9 @@ export const FloatingNav: React.FC = () => {
             <MagneticButton
               variant="primary"
               onClick={() => scrollTo('#contact', { offset: -30 })}
-              className="px-4 py-2 text-xs uppercase tracking-wider font-semibold"
+              className="px-5 py-2 text-xs uppercase tracking-wider font-semibold"
             >
-              Let's Talk
+              Let&apos;s Talk
             </MagneticButton>
           </div>
 

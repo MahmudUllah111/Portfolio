@@ -52,7 +52,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
               className="pointer-events-auto p-4 rounded-2xl bg-obsidian-surface/90 border border-white/10 backdrop-blur-xl shadow-subtle-elevation flex items-start gap-3 text-typography-primary"
             >
               {toast.type === 'success' && (
-                <CheckCircle2 className="w-5 h-5 text-accent-cyan flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+                <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
               )}
               {toast.type === 'error' && (
                 <AlertCircle className="w-5 h-5 text-rose-400 flex-shrink-0 mt-0.5" strokeWidth={1.5} />

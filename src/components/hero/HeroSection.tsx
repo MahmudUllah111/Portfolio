@@ -1,145 +1,148 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Terminal, Sparkles } from 'lucide-react';
+import { ArrowDown, Github } from 'lucide-react';
 import { StatusIndicator } from './StatusIndicator';
-import { HeroCenterpiece } from './HeroCenterpiece';
 import { MagneticButton } from '../common/MagneticButton';
-import { BorderBeam } from '../common/BorderBeam';
 import { useLenis } from '../../hooks/useLenis';
 
 export const HeroSection: React.FC = () => {
   const { scrollTo } = useLenis();
+  const [liveTime, setLiveTime] = useState<string>('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const formatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Dhaka',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+      });
+      setLiveTime(formatter.format(now));
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section
       id="hero"
       className="relative min-h-[100dvh] flex flex-col justify-between pt-28 md:pt-36 pb-12 px-4 sm:px-6 md:px-8 max-w-[1380px] w-[92%] mx-auto select-none"
     >
-      {/* Subtle Ambient Radial Glow */}
-      <div
-        aria-hidden="true"
-        className="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[700px] h-[350px] md:h-[500px] bg-gradient-to-tr from-accent-cyan/15 via-accent-indigo/10 to-transparent rounded-full blur-[120px] pointer-events-none -z-10"
-      />
-
-      {/* 2-Column Asymmetrical Grid Split */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center my-auto w-full">
-        {/* Left Column: 60% (Col 7) */}
-        <div className="lg:col-span-7 flex flex-col items-start gap-6 md:gap-7">
-          {/* Status Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <StatusIndicator />
-          </motion.div>
-
-          {/* Mask-Reveal Kinetic Headline */}
-          <div className="overflow-hidden">
-            <motion.h1
-              initial={{ y: '100%', opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display font-extrabold text-[clamp(3.25rem,6.5vw,6.25rem)] leading-[0.95] tracking-[-0.04em] text-typography-primary"
-            >
-              A.F.M Mahmud <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-typography-primary via-white to-accent-cyan">
-                Ullah
-              </span>
-            </motion.h1>
-          </div>
-
-          {/* Sub-headline */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center gap-2 text-accent-cyan font-mono text-sm sm:text-base md:text-lg font-medium tracking-tight"
-          >
-            <Terminal className="w-4 h-4 text-accent-cyan" strokeWidth={1.5} />
-            <span>Full-Stack Web Developer &amp; Systems Architect</span>
-          </motion.div>
-
-          {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="text-base sm:text-lg md:text-xl text-typography-secondary leading-relaxed max-w-[55ch]"
-          >
-            Crafting high-scale relational web systems, modular CMS architectures, and razor-sharp 60fps digital experiences.
-          </motion.p>
-
-          {/* Dual Magnetic Action Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap items-center gap-4 pt-2"
-          >
-            {/* Primary CTA with animated Traveling Border Beam */}
-            <div className="relative group overflow-hidden rounded-full p-[1px]">
-              <BorderBeam size={160} duration={6} borderWidth={1.5} colorFrom="#00F0FF" colorTo="#6366F1" />
-              <MagneticButton
-                variant="primary"
-                onClick={() => scrollTo('#work', { offset: -30 })}
-                className="px-7 py-3.5 text-sm font-semibold uppercase tracking-wider"
-              >
-                Explore Work
-              </MagneticButton>
-            </div>
-
-            {/* Secondary CTA: GitHub */}
-            <MagneticButton
-              variant="secondary"
-              as="a"
-              href="https://github.com/MahmudUllah111?tab=repositories"
-              target="_blank"
-              rel="noopener noreferrer"
-              showArrow={true}
-              className="px-6 py-3.5 text-sm font-medium"
-            >
-              <span className="flex items-center gap-2">
-                <Github className="w-4 h-4 text-typography-primary" strokeWidth={1.5} />
-                GitHub
-              </span>
-            </MagneticButton>
-          </motion.div>
+      {/* Top Editorial Telemetry Bar */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 border-b border-white/10 font-mono text-xs text-typography-muted"
+      >
+        <div className="flex items-center gap-2 text-typography-primary">
+          <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+          <span className="uppercase tracking-widest font-semibold">FULL-STACK ENGINEER &amp; SYSTEMS ARCHITECT</span>
         </div>
 
-        {/* Right Column: 40% (Col 5) - Interactive 3D Geodesic Centerpiece */}
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-typography-secondary font-medium">
+              DHAKA, BD — {liveTime || '12:00:00 PM'} (UTC+6)
+            </span>
+          </div>
+          <span className="hidden md:inline text-white/20">|</span>
+          <span className="hidden md:inline uppercase text-typography-muted tracking-wider">
+            FIRST-PRINCIPLES CRAFT
+          </span>
+        </div>
+      </motion.div>
+
+      {/* Main Full-Width Editorial Typography Moment */}
+      <div className="my-auto py-12 md:py-20 flex flex-col items-start gap-8 max-w-5xl">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-5 flex justify-center lg:justify-end"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <HeroCenterpiece />
+          <StatusIndicator />
+        </motion.div>
+
+        {/* Massive, Razor-Sharp Off-White Headline (Zero AI Gradient Text) */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="space-y-1"
+        >
+          <h1 className="font-display font-extrabold text-[clamp(3.5rem,8.5vw,8.5rem)] leading-[0.92] tracking-[-0.04em] text-typography-primary uppercase">
+            A.F.M Mahmud <br />
+            <span className="text-typography-primary">Ullah</span>
+          </h1>
+        </motion.div>
+
+        {/* Crisp Editorial Subtext */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="text-lg sm:text-xl md:text-2xl text-typography-secondary leading-relaxed max-w-[62ch] font-normal"
+        >
+          Specialized in high-scale relational web architectures, custom modular CMS engines, and 60fps editorial interfaces built with production rigor.
+        </motion.p>
+
+        {/* Actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-wrap items-center gap-4 pt-4"
+        >
+          <MagneticButton
+            variant="primary"
+            onClick={() => scrollTo('#work', { offset: -30 })}
+            className="px-8 py-4 text-xs uppercase tracking-widest font-bold"
+          >
+            Explore Selected Work
+          </MagneticButton>
+
+          <MagneticButton
+            variant="secondary"
+            as="a"
+            href="https://github.com/MahmudUllah111?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            showArrow={true}
+            className="px-7 py-4 text-xs uppercase tracking-widest font-semibold"
+          >
+            <span className="flex items-center gap-2">
+              <Github className="w-4 h-4 text-typography-primary" strokeWidth={1.5} />
+              GitHub Repositories
+            </span>
+          </MagneticButton>
         </motion.div>
       </div>
 
-      {/* Hero Footer Meta & Scroll Telemetry */}
+      {/* Bottom Editorial Meta Bar */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="flex items-center justify-between pt-8 border-t border-white/5 font-mono text-xs text-typography-muted"
+        className="flex items-center justify-between pt-8 border-t border-white/10 font-mono text-xs text-typography-muted"
       >
         <div className="flex items-center gap-6">
-          <span className="flex items-center gap-1.5 text-typography-secondary">
-            <Sparkles className="w-3.5 h-3.5 text-accent-cyan" strokeWidth={1.5} />
-            <span>DHAKA, BANGLADESH</span>
+          <span>LAT 23.8103° N // LON 90.4125° E</span>
+          <span className="hidden sm:inline">·</span>
+          <span className="hidden sm:inline text-typography-secondary">
+            LARAVEL / REACT / TYPESCRIPT / INERTIA
           </span>
-          <span className="hidden sm:inline">LAT 23.8103° N</span>
-          <span className="hidden sm:inline">LON 90.4125° E</span>
         </div>
 
         <button
           onClick={() => scrollTo('#about', { offset: -30 })}
-          className="flex items-center gap-2 text-typography-secondary hover:text-accent-cyan transition-colors group cursor-pointer"
+          className="flex items-center gap-2 text-typography-secondary hover:text-typography-primary transition-colors group cursor-pointer"
           aria-label="Scroll to about section"
         >
-          <span className="uppercase tracking-widest text-[11px]">SCROLL // 01</span>
+          <span className="uppercase tracking-widest text-[11px]">SCROLL TO EXPLORE</span>
           <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-1 transition-transform duration-300" strokeWidth={1.5} />
         </button>
       </motion.div>

@@ -9,24 +9,23 @@ export default {
     extend: {
       colors: {
         obsidian: {
-          DEFAULT: '#050508',
-          void: '#030305',
-          surface: '#0C0C12',
-          card: '#12121A',
-          elevated: '#161622',
+          DEFAULT: '#08080A',
+          void: '#050507',
+          surface: '#111114',
+          card: '#16161A',
+          elevated: '#1C1C22',
           border: 'rgba(255, 255, 255, 0.08)',
           'border-strong': 'rgba(255, 255, 255, 0.16)',
         },
         accent: {
-          cyan: '#00F0FF',
-          indigo: '#6366F1',
-          violet: '#8B5CF6',
-          glow: 'rgba(0, 240, 255, 0.15)',
+          active: '#E4E4E7',
+          dot: '#38BDF8',
+          subtle: 'rgba(255, 255, 255, 0.08)',
         },
         typography: {
-          primary: '#F4F4F6',
-          secondary: '#8E8E9E',
-          muted: '#525260',
+          primary: '#F5F5F7',
+          secondary: '#A1A1AA',
+          muted: '#71717A',
         },
       },
       fontFamily: {
@@ -38,31 +37,21 @@ export default {
         '2xl': '1rem',
         '3xl': '1.5rem',
         '4xl': '2rem',
-        '5xl': '2.5rem',
       },
       boxShadow: {
-        'glow-cyan': '0 0 35px -5px rgba(0, 240, 255, 0.25)',
-        'glow-indigo': '0 0 35px -5px rgba(99, 102, 241, 0.25)',
-        'inner-bezel': 'inset 0 1px 1px 0 rgba(255, 255, 255, 0.12)',
-        'subtle-elevation': '0 20px 40px -15px rgba(0, 0, 0, 0.7)',
+        'subtle-elevation': '0 20px 40px -15px rgba(0, 0, 0, 0.8)',
+        'hairline': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.08)',
       },
       animation: {
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'radar': 'radar 2.5s cubic-bezier(0, 0, 0.2, 1) infinite',
-        'marquee': 'marquee 35s linear infinite',
-        'marquee-reverse': 'marquee-reverse 35s linear infinite',
+        'marquee': 'marquee 40s linear infinite',
+        'marquee-reverse': 'marquee-reverse 40s linear infinite',
         'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
-        'spin-slow': 'spin 20s linear infinite',
       },
       keyframes: {
         'border-beam': {
           '100%': {
             'offset-distance': '100%',
           },
-        },
-        radar: {
-          '0%': { transform: 'scale(1)', opacity: '0.8' },
-          '100%': { transform: 'scale(2.5)', opacity: '0' },
         },
         marquee: {
           '0%': { transform: 'translateX(0%)' },

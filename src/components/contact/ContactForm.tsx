@@ -94,7 +94,7 @@ export const ContactForm: React.FC = () => {
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="John Doe"
-            className="w-full px-4 py-3 rounded-xl bg-obsidian-surface border border-white/10 text-typography-primary placeholder:text-typography-muted text-sm focus:outline-none focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan transition-colors"
+            className="w-full px-4 py-3 rounded-xl bg-obsidian-surface border border-white/10 text-typography-primary placeholder:text-typography-muted text-sm focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-colors"
           />
           {errors.name && (
             <span className="font-mono text-[11px] text-rose-400">{errors.name}</span>
@@ -112,7 +112,7 @@ export const ContactForm: React.FC = () => {
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="john@example.com"
-            className="w-full px-4 py-3 rounded-xl bg-obsidian-surface border border-white/10 text-typography-primary placeholder:text-typography-muted text-sm focus:outline-none focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan transition-colors"
+            className="w-full px-4 py-3 rounded-xl bg-obsidian-surface border border-white/10 text-typography-primary placeholder:text-typography-muted text-sm focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-colors"
           />
           {errors.email && (
             <span className="font-mono text-[11px] text-rose-400">{errors.email}</span>
@@ -131,7 +131,7 @@ export const ContactForm: React.FC = () => {
           value={formData.subject}
           onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
           placeholder="Enterprise Platform / Full-Stack Contract"
-          className="w-full px-4 py-3 rounded-xl bg-obsidian-surface border border-white/10 text-typography-primary placeholder:text-typography-muted text-sm focus:outline-none focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan transition-colors"
+          className="w-full px-4 py-3 rounded-xl bg-obsidian-surface border border-white/10 text-typography-primary placeholder:text-typography-muted text-sm focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-colors"
         />
       </div>
 
@@ -147,7 +147,7 @@ export const ContactForm: React.FC = () => {
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           placeholder="Tell me about your architectural goals, timeline, and key challenges..."
-          className="w-full px-4 py-3 rounded-xl bg-obsidian-surface border border-white/10 text-typography-primary placeholder:text-typography-muted text-sm focus:outline-none focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan transition-colors resize-none"
+          className="w-full px-4 py-3 rounded-xl bg-obsidian-surface border border-white/10 text-typography-primary placeholder:text-typography-muted text-sm focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-colors resize-none"
         />
         {errors.message && (
           <span className="font-mono text-[11px] text-rose-400">{errors.message}</span>
@@ -161,7 +161,7 @@ export const ContactForm: React.FC = () => {
           variant="primary"
           disabled={isSubmitting}
           showArrow={false}
-          className="w-full sm:w-auto px-8 py-3.5 text-sm font-semibold uppercase tracking-wider justify-center"
+          className="w-full sm:w-auto px-8 py-3.5 text-xs uppercase font-bold tracking-wider justify-center"
         >
           {isSubmitting ? (
             <span className="flex items-center gap-2">
@@ -177,7 +177,7 @@ export const ContactForm: React.FC = () => {
         </MagneticButton>
 
         {submitted && (
-          <p className="font-mono text-xs text-accent-cyan mt-3 animate-fade-in">
+          <p className="font-mono text-xs text-emerald-400 mt-3 animate-fade-in">
             ✓ Message received. Look forward to connecting!
           </p>
         )}

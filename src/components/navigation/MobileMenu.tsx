@@ -47,7 +47,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           <div className="absolute top-6 right-6">
             <button
               onClick={onClose}
-              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-typography-primary active:scale-95"
+              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-typography-primary active:scale-95 cursor-pointer"
               aria-label="Close menu"
             >
               <X className="w-5 h-5" strokeWidth={1.5} />
@@ -66,20 +66,20 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.05 * index, duration: 0.4 }}
-                  className="flex items-center justify-between py-2 border-b border-white/5 group text-2xl font-display font-semibold tracking-tight"
+                  className="flex items-center justify-between py-2 border-b border-white/5 group text-2xl font-display font-semibold tracking-tight cursor-pointer"
                 >
                   <span
                     className={
                       isActive
-                        ? 'text-accent-cyan'
-                        : 'text-typography-primary group-hover:text-accent-cyan transition-colors'
+                        ? 'text-white font-bold'
+                        : 'text-typography-secondary group-hover:text-white transition-colors'
                     }
                   >
                     {item.label}
                   </span>
                   <ArrowUpRight
                     className={`w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 ${
-                      isActive ? 'text-accent-cyan' : 'text-typography-muted'
+                      isActive ? 'text-white' : 'text-typography-muted'
                     }`}
                   />
                 </motion.a>
@@ -91,10 +91,10 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           <div className="pt-6 border-t border-white/10 flex flex-col gap-3 font-mono text-xs text-typography-muted">
             <div className="flex justify-between items-center">
               <span>LOCATION: DHAKA, BD</span>
-              <span className="text-accent-cyan">UTC+6 BST</span>
+              <span className="text-typography-secondary">UTC+6 BST</span>
             </div>
-            <p className="text-[11px] text-typography-secondary">
-              Available for high-impact full-stack and systems engineering.
+            <p className="text-[11px] text-typography-muted">
+              Full-Stack &amp; Systems Architecture · Editorial Craft
             </p>
           </div>
         </motion.div>

@@ -1,284 +1,164 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Code2, Server, Wrench, Terminal, CheckCircle2 } from 'lucide-react';
-import { DoubleBezelCard } from '../common/DoubleBezelCard';
 
-const STACK_ROW_1 = [
-  'React 19',
-  'TypeScript',
-  'Laravel',
-  'Inertia.js',
-  'PHP 8.4',
-  'Tailwind CSS',
-  'GSAP ScrollTrigger',
-  'Framer Motion',
-  'MySQL / MariaDB',
-  'Vue.js 3',
+interface TechItem {
+  name: string;
+  detail: string;
+  badge?: string;
+}
+
+interface TechCategory {
+  index: string;
+  title: string;
+  role: string;
+  items: TechItem[];
+}
+
+const CATEGORIES: TechCategory[] = [
+  {
+    index: '01',
+    title: 'Frontend Engineering',
+    role: 'Kinetic UI, Component Architecture & 60fps Choreography',
+    items: [
+      { name: 'React 19', detail: 'Modern hooks, component trees, state machines', badge: 'Core' },
+      { name: 'TypeScript', detail: 'Strict contracts, generic types, compile-time safety', badge: 'Core' },
+      { name: 'Inertia.js', detail: 'Monolithic SPA flow without client-side API drag', badge: 'Primary' },
+      { name: 'Vue.js 3', detail: 'Composition API, reactive stores, components' },
+      { name: 'Tailwind CSS', detail: 'Design tokens, dark themes, responsive layouts', badge: 'Core' },
+      { name: 'GSAP ScrollTrigger', detail: 'Scroll-linked timelines, scrubbed progress', badge: 'Motion' },
+      { name: 'Framer Motion', detail: 'Spring physics, gestures, layout transitions', badge: 'Motion' },
+    ],
+  },
+  {
+    index: '02',
+    title: 'Backend & Modular CMS',
+    role: 'Service Layers, Relational Schemas & Custom CMS Platforms',
+    items: [
+      { name: 'Laravel (PHP 8.4)', detail: 'Eloquent pipelines, service providers, queues', badge: 'Core' },
+      { name: 'MySQL & MariaDB', detail: 'Normalized relational schemas and query index tuning', badge: 'Core' },
+      { name: 'Custom Media & CMS', detail: 'Media managers, drag-and-drop block layout engines', badge: 'Custom' },
+      { name: 'RESTful API Engineering', detail: 'Resource serialization, Sanctum auth, rate limiting' },
+      { name: 'Filament Admin', detail: 'Rapid administrative portals and data table builders' },
+    ],
+  },
+  {
+    index: '03',
+    title: 'Systems & Tooling',
+    role: 'Developer Workflows, Machine Intelligence & Testing',
+    items: [
+      { name: 'Git & GitHub', detail: 'Branching discipline, CI/CD actions, review rigour', badge: 'Core' },
+      { name: 'Linux Administration', detail: 'Daemon orchestration, server tuning, deployment' },
+      { name: 'AI & Agentic Workflows', detail: 'Autonomous agents, workflow scripts, rapid prototyping', badge: 'Augmented' },
+      { name: 'Vite', detail: 'Sub-second HMR, rollup configuration, asset pipelines' },
+      { name: 'Playwright E2E', detail: 'Automated end-to-end browser regression testing' },
+    ],
+  },
 ];
 
-const STACK_ROW_2 = [
-  'RESTful Architecture',
-  'Custom CMS Builders',
-  'Vite',
-  'Git & GitHub',
-  'Linux Administration',
-  'AI-Assisted Workflows',
-  'Playwright E2E',
-  'Filament Admin',
-  'Edge Robotics & CV',
-  'Docker',
+const MARQUEE_ROW_1 = [
+  'React 19', 'TypeScript', 'Laravel 11', 'Inertia.js', 'PHP 8.4',
+  'Tailwind CSS', 'GSAP ScrollTrigger', 'Framer Motion', 'MySQL / MariaDB', 'Vue.js 3'
+];
+
+const MARQUEE_ROW_2 = [
+  'RESTful Architecture', 'Modular CMS Engines', 'Vite', 'Git & GitHub',
+  'Linux Administration', 'AI-Augmented Workflows', 'Playwright', 'Filament', 'Mechatronics'
 ];
 
 export const TechArsenal: React.FC = () => {
+
   return (
-    <section id="stack" className="py-24 md:py-32 px-4 sm:px-6 md:px-8 max-w-[1380px] w-[92%] mx-auto select-none">
-      {/* Section Header with Monospace Index Tag */}
-      <div className="flex flex-col items-start gap-3 mb-16">
-        <div className="flex items-center gap-2 text-accent-cyan font-mono text-xs uppercase tracking-widest">
-          <Terminal className="w-3.5 h-3.5" strokeWidth={1.5} />
-          <span>02 // ARSENAL &amp; PRODUCTION STACK</span>
+    <section id="stack" className="py-28 md:py-36 px-4 sm:px-6 md:px-8 max-w-[1380px] w-[92%] mx-auto select-none">
+      {/* Section Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-white/10">
+        <div className="flex flex-col items-start gap-3">
+          <div className="flex items-center gap-2 text-typography-muted font-mono text-xs uppercase tracking-widest">
+            <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+            <span>02 // ARSENAL &amp; PRODUCTION STACK</span>
+          </div>
+          <h2 className="font-display font-bold text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.98] tracking-tight text-typography-primary uppercase">
+            Technical Arsenal
+          </h2>
         </div>
-        <h2 className="font-display font-bold text-[clamp(2.25rem,4vw,3.75rem)] leading-[1.05] tracking-tight text-typography-primary">
-          Technical Arsenal
-        </h2>
-        <p className="text-typography-secondary text-base md:text-lg max-w-2xl leading-relaxed">
-          A battle-tested spectrum of languages, systems, and engineering frameworks leveraged across high-scale enterprise and client platforms.
+        <p className="text-typography-secondary text-base md:text-lg max-w-md leading-relaxed font-normal">
+          A battle-tested spectrum of languages, frameworks, and engineering tools leveraged across client &amp; enterprise production.
         </p>
       </div>
 
-      {/* 3 Spacious Category Cards (No cramped progress bars!) */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
-        {/* Category 1: Frontend Architecture */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.5 }}
-          className="h-full"
-        >
-          <DoubleBezelCard className="h-full">
-            <div className="flex flex-col justify-between h-full gap-6">
-              <div>
-                <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
-                  <div className="flex items-center gap-3">
-                    <span className="w-10 h-10 rounded-2xl bg-accent-cyan/10 border border-accent-cyan/20 flex items-center justify-center text-accent-cyan shadow-glow-cyan/20">
-                      <Code2 className="w-5 h-5" strokeWidth={1.5} />
-                    </span>
-                    <div>
-                      <h3 className="font-display font-bold text-xl text-typography-primary">
-                        Frontend Engineering
-                      </h3>
-                      <p className="font-mono text-xs text-typography-muted">
-                        Kinetic UI &amp; Component Systems
-                      </p>
-                    </div>
-                  </div>
-                  <span className="font-mono text-xs text-typography-muted">02.1</span>
-                </div>
-
-                <p className="text-sm text-typography-secondary mb-6 leading-relaxed">
-                  Crafting accessible, reactive client architectures with sub-frame response times, zero layout shifts, and cinematic 60fps motion choreography.
-                </p>
-
-                {/* Tech Pills */}
-                <div className="space-y-2.5">
-                  {[
-                    { name: 'React & TypeScript', detail: 'Strict contracts, hooks, and clean components' },
-                    { name: 'Inertia.js & Vue.js', detail: 'Monolithic SPA flow with seamless routing' },
-                    { name: 'Tailwind CSS', detail: 'Fluid design systems, tokens, and dark aesthetics' },
-                    { name: 'GSAP & Framer Motion', detail: 'ScrollTrigger timelines and physics hover' },
-                  ].map((tech) => (
-                    <div
-                      key={tech.name}
-                      className="p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/15 hover:bg-white/[0.04] transition-colors"
-                    >
-                      <div className="flex items-center justify-between font-mono text-xs text-typography-primary font-semibold">
-                        <span className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan" />
-                          {tech.name}
-                        </span>
-                        <CheckCircle2 className="w-3.5 h-3.5 text-accent-cyan/60" strokeWidth={1.5} />
-                      </div>
-                      <p className="text-[11px] text-typography-muted mt-1 font-mono">
-                        {tech.detail}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-white/5 font-mono text-xs text-typography-muted flex items-center justify-between">
-                <span>DOM EXPERTISE</span>
-                <span className="text-accent-cyan">60 FPS CHOREOGRAPHY</span>
-              </div>
+      {/* Sleek Horizontal Typographic Index (Open Editorial Rows) */}
+      <div className="divide-y divide-white/10 border-b border-white/10">
+        {CATEGORIES.map((category) => (
+          <div
+            key={category.index}
+            className="grid grid-cols-1 lg:grid-cols-12 py-10 md:py-14 gap-8 items-start group hover:bg-white/[0.015] transition-colors"
+          >
+            {/* Category Label (Col 4) */}
+            <div className="lg:col-span-4 flex flex-col gap-2">
+              <span className="font-mono text-xs text-typography-muted">
+                {category.index} //
+              </span>
+              <h3 className="font-display font-bold text-2xl md:text-3xl text-typography-primary">
+                {category.title}
+              </h3>
+              <p className="text-xs font-mono text-typography-muted mt-1 leading-relaxed">
+                {category.role}
+              </p>
             </div>
-          </DoubleBezelCard>
-        </motion.div>
 
-        {/* Category 2: Backend & Modular CMS */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="h-full"
-        >
-          <DoubleBezelCard className="h-full">
-            <div className="flex flex-col justify-between h-full gap-6">
-              <div>
-                <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
-                  <div className="flex items-center gap-3">
-                    <span className="w-10 h-10 rounded-2xl bg-accent-indigo/10 border border-accent-indigo/20 flex items-center justify-center text-accent-indigo shadow-glow-indigo/20">
-                      <Server className="w-5 h-5" strokeWidth={1.5} />
-                    </span>
-                    <div>
-                      <h3 className="font-display font-bold text-xl text-typography-primary">
-                        Backend &amp; Modular CMS
-                      </h3>
-                      <p className="font-mono text-xs text-typography-muted">
-                        Service Layers &amp; Relational Data
-                      </p>
-                    </div>
-                  </div>
-                  <span className="font-mono text-xs text-typography-muted">02.2</span>
-                </div>
-
-                <p className="text-sm text-typography-secondary mb-6 leading-relaxed">
-                  Engineering robust server architectures, normalized relational schemas, and bespoke media library managers engineered for high concurrency.
-                </p>
-
-                {/* Tech Pills */}
-                <div className="space-y-2.5">
-                  {[
-                    { name: 'Laravel & Modern PHP', detail: 'Eloquent pipelines, service providers, queues' },
-                    { name: 'MySQL & MariaDB', detail: 'Normalized relational schemas and query index optimization' },
-                    { name: 'Custom Media & CMS Engines', detail: 'Chunked uploads, dynamic block widget composition' },
-                    { name: 'RESTful API Engineering', detail: 'Resource serialization, Sanctum auth, rate limiting' },
-                  ].map((tech) => (
-                    <div
-                      key={tech.name}
-                      className="p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/15 hover:bg-white/[0.04] transition-colors"
-                    >
-                      <div className="flex items-center justify-between font-mono text-xs text-typography-primary font-semibold">
-                        <span className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent-indigo" />
-                          {tech.name}
+            {/* Tech Stack Items (Col 8) */}
+            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {category.items.map((item) => (
+                <div
+                  key={item.name}
+                  className="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.06] hover:border-white/15 transition-all cursor-default flex flex-col justify-between gap-2"
+                >
+                    <div className="flex items-center justify-between">
+                      <span className="font-display font-semibold text-base text-typography-primary">
+                        {item.name}
+                      </span>
+                      {item.badge && (
+                        <span className="font-mono text-[10px] uppercase px-2 py-0.5 rounded bg-white/5 text-typography-muted border border-white/10">
+                          {item.badge}
                         </span>
-                        <CheckCircle2 className="w-3.5 h-3.5 text-accent-indigo/60" strokeWidth={1.5} />
-                      </div>
-                      <p className="text-[11px] text-typography-muted mt-1 font-mono">
-                        {tech.detail}
-                      </p>
+                      )}
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-white/5 font-mono text-xs text-typography-muted flex items-center justify-between">
-                <span>SCALABLE DATA</span>
-                <span className="text-accent-indigo">ZERO-LEAK SYSTEMS</span>
-              </div>
-            </div>
-          </DoubleBezelCard>
-        </motion.div>
-
-        {/* Category 3: Systems & Tooling */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="h-full"
-        >
-          <DoubleBezelCard className="h-full">
-            <div className="flex flex-col justify-between h-full gap-6">
-              <div>
-                <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
-                  <div className="flex items-center gap-3">
-                    <span className="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                      <Wrench className="w-5 h-5" strokeWidth={1.5} />
-                    </span>
-                    <div>
-                      <h3 className="font-display font-bold text-xl text-typography-primary">
-                        Systems &amp; Tooling
-                      </h3>
-                      <p className="font-mono text-xs text-typography-muted">
-                        Automation &amp; Machine Intelligence
-                      </p>
-                    </div>
+                    <p className="text-xs text-typography-muted font-mono leading-relaxed">
+                      {item.detail}
+                    </p>
                   </div>
-                  <span className="font-mono text-xs text-typography-muted">02.3</span>
-                </div>
-
-                <p className="text-sm text-typography-secondary mb-6 leading-relaxed">
-                  Streamlined DevOps and developer environments incorporating agentic AI orchestration, browser verification, and reliable Linux systems.
-                </p>
-
-                {/* Tech Pills */}
-                <div className="space-y-2.5">
-                  {[
-                    { name: 'Git & Version Workflows', detail: 'Branching discipline, CI/CD actions, review rigour' },
-                    { name: 'Linux Systems & Shell', detail: 'Daemon orchestration, server tuning, and deployment' },
-                    { name: 'AI & Agentic Development', detail: 'Autonomous agents, workflow scripts, rapid prototyping' },
-                    { name: 'Vite & Playwright', detail: 'Sub-second HMR, bundling, automated browser verification' },
-                  ].map((tech) => (
-                    <div
-                      key={tech.name}
-                      className="p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/15 hover:bg-white/[0.04] transition-colors"
-                    >
-                      <div className="flex items-center justify-between font-mono text-xs text-typography-primary font-semibold">
-                        <span className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                          {tech.name}
-                        </span>
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400/60" strokeWidth={1.5} />
-                      </div>
-                      <p className="text-[11px] text-typography-muted mt-1 font-mono">
-                        {tech.detail}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-white/5 font-mono text-xs text-typography-muted flex items-center justify-between">
-                <span>REPRODUCIBLE</span>
-                <span className="text-emerald-400">AUTOMATED AUDITS</span>
-              </div>
+                ))}
             </div>
-          </DoubleBezelCard>
-        </motion.div>
+          </div>
+        ))}
       </div>
 
-      {/* Futuristic Dual-Row Velocity Marquee (Opposite Directions) */}
-      <div className="relative overflow-hidden py-8 border-y border-white/5 bg-obsidian-surface/30 rounded-3xl">
-        {/* Soft edge masks */}
-        <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-obsidian to-transparent z-10 pointer-events-none" />
-        <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-obsidian to-transparent z-10 pointer-events-none" />
+      {/* Restrained Dual-Row Velocity Marquee */}
+      <div className="relative overflow-hidden pt-12 select-none">
+        <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-obsidian to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-obsidian to-transparent z-10 pointer-events-none" />
 
-        <div className="flex flex-col gap-4">
-          {/* Row 1: Leftward Marquee */}
-          <div className="flex gap-4 w-max animate-marquee">
-            {[...STACK_ROW_1, ...STACK_ROW_1, ...STACK_ROW_1].map((tech, i) => (
+        <div className="flex flex-col gap-3">
+          {/* Row 1 */}
+          <div className="flex gap-3 w-max animate-marquee">
+            {[...MARQUEE_ROW_1, ...MARQUEE_ROW_1, ...MARQUEE_ROW_1].map((tech, i) => (
               <div
-                key={`row1-${tech}-${i}`}
-                className="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-obsidian-card border border-white/10 text-xs font-mono text-typography-secondary whitespace-nowrap hover:border-accent-cyan/50 hover:text-typography-primary transition-all shadow-sm"
+                key={`m1-${tech}-${i}`}
+                className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.02] text-xs font-mono text-typography-secondary whitespace-nowrap hover:border-white/25 hover:text-typography-primary transition-all"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan shadow-glow-cyan" />
-                <span className="font-semibold text-typography-primary">{tech}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                <span>{tech}</span>
               </div>
             ))}
           </div>
 
-          {/* Row 2: Rightward Reverse Marquee */}
-          <div className="flex gap-4 w-max animate-marquee-reverse">
-            {[...STACK_ROW_2, ...STACK_ROW_2, ...STACK_ROW_2].map((tech, i) => (
+          {/* Row 2 */}
+          <div className="flex gap-3 w-max animate-marquee-reverse">
+            {[...MARQUEE_ROW_2, ...MARQUEE_ROW_2, ...MARQUEE_ROW_2].map((tech, i) => (
               <div
-                key={`row2-${tech}-${i}`}
-                className="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-obsidian-card border border-white/10 text-xs font-mono text-typography-secondary whitespace-nowrap hover:border-accent-indigo/50 hover:text-typography-primary transition-all shadow-sm"
+                key={`m2-${tech}-${i}`}
+                className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.02] text-xs font-mono text-typography-secondary whitespace-nowrap hover:border-white/25 hover:text-typography-primary transition-all"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-accent-indigo shadow-glow-indigo" />
-                <span className="font-semibold text-typography-primary">{tech}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                <span>{tech}</span>
               </div>
             ))}
           </div>

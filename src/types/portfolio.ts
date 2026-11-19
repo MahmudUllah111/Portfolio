@@ -16,6 +16,7 @@ export interface Project {
   year: string;
   techStack: string[];
   featured: boolean;
+  imageUrl: string;
   githubUrl?: string;
   liveUrl?: string;
   isPrivate: boolean;

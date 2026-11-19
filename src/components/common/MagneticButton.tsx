@@ -26,13 +26,13 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
   const magneticRef = useMagnetic<HTMLDivElement>({ strength: 0.25 });
 
   const baseStyles =
-    'group relative inline-flex items-center gap-3 rounded-full font-medium transition-all duration-300 text-sm tracking-tight active:scale-[0.98] select-none';
+    'group relative inline-flex items-center gap-3 rounded-full font-medium transition-all duration-300 text-sm tracking-tight active:scale-[0.98] select-none cursor-pointer';
 
   const variantStyles = {
     primary:
-      'bg-typography-primary text-obsidian px-5 py-2.5 hover:bg-white shadow-glow-cyan/20 border border-transparent',
+      'bg-typography-primary text-obsidian px-6 py-3 hover:bg-white shadow-sm border border-transparent',
     secondary:
-      'bg-obsidian-surface text-typography-primary px-5 py-2.5 border border-white/10 hover:border-white/25 hover:bg-obsidian-card',
+      'bg-obsidian-surface text-typography-primary px-6 py-3 border border-white/10 hover:border-white/25 hover:bg-obsidian-card',
     ghost:
       'text-typography-secondary hover:text-typography-primary px-4 py-2 hover:bg-white/5',
   };
