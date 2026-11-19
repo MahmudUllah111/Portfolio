@@ -11,6 +11,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
   return (
     <div
       onClick={() => onSelect(project)}
+      data-cursor="explore"
       className="group flex flex-col justify-between h-full rounded-2xl bg-obsidian-surface border border-white/10 overflow-hidden hover:border-white/20 transition-all duration-500 cursor-pointer shadow-subtle-elevation"
     >
       <div>

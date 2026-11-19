@@ -15,14 +15,26 @@ export const FloatingNav: React.FC = () => {
   const { scrollTo } = useLenis();
   const [activeSection, setActiveSection] = useState('hero');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 40);
+
+      // Smart hide on fast scroll down, reveal on scroll up
+      if (currentScrollY > 240 && currentScrollY > lastScrollY && !mobileMenuOpen) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      lastScrollY = currentScrollY;
 
       const sections = ['hero', 'about', 'work', 'stack', 'experience', 'contact'];
-      const scrollPosition = window.scrollY + 200;
+      const scrollPosition = currentScrollY + 250;
 
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
@@ -39,7 +51,7 @@ export const FloatingNav: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mobileMenuOpen]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -50,9 +62,9 @@ export const FloatingNav: React.FC = () => {
   return (
     <>
       <header
-        className={`fixed top-4 md:top-6 left-0 right-0 z-40 px-4 md:px-0 flex justify-center transition-all duration-500 ${
-          isScrolled ? 'translate-y-0' : 'translate-y-0'
-        }`}
+        className={`fixed top-4 md:top-6 left-0 right-0 z-40 px-4 md:px-0 flex justify-center transition-all duration-500 ease-out ${
+          isVisible ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-24 opacity-0 pointer-events-none'
+        } ${isScrolled ? 'drop-shadow-2xl' : ''}`}
       >
         <nav
           aria-label="Main Navigation"
@@ -65,7 +77,7 @@ export const FloatingNav: React.FC = () => {
             className="flex items-center gap-1.5 group font-display font-bold text-lg md:text-xl tracking-tighter text-typography-primary cursor-pointer"
           >
             <span>MAHMUD</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-white/50" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
           </a>
 
           {/* Desktop Navigation Links */}
@@ -135,3 +147,5 @@ export const FloatingNav: React.FC = () => {
     </>
   );
 };
+
+export default FloatingNav;

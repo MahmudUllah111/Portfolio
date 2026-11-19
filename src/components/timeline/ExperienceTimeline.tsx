@@ -1,5 +1,6 @@
 import React from 'react';
 import { EXPERIENCES } from '../../data/experience';
+import { PerspectiveHeading } from '../common/PerspectiveHeading';
 
 export const ExperienceTimeline: React.FC = () => {
   return (
@@ -8,12 +9,13 @@ export const ExperienceTimeline: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-white/10 mb-6">
         <div className="flex flex-col items-start gap-3">
           <div className="flex items-center gap-2 text-typography-muted font-mono text-xs uppercase tracking-widest">
-            <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>04 // TIMELINE &amp; CAREER RECORD</span>
           </div>
-          <h2 className="font-display font-bold text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.98] tracking-tight text-typography-primary uppercase">
-            Experience &amp; Education
-          </h2>
+          <PerspectiveHeading
+            text="Experience &amp; Education"
+            className="font-display font-bold text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.98] tracking-tight text-typography-primary uppercase"
+          />
         </div>
         <p className="text-typography-secondary text-base md:text-lg max-w-md leading-relaxed font-normal">
           Engineering track record in enterprise systems, dynamic client platforms, and computer science research.

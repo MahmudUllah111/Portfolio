@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { PerspectiveHeading } from '../common/PerspectiveHeading';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 interface TechItem {
   name: string;
@@ -64,7 +67,84 @@ const MARQUEE_ROW_2 = [
   'Linux Administration', 'AI-Augmented Workflows', 'Playwright', 'Filament', 'Mechatronics'
 ];
 
+// Interactive Metallic Sheen Card
+const SheenCard: React.FC<{ item: TechItem }> = ({ item }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative p-5 rounded-xl border border-white/5 bg-white/[0.02] transition-colors duration-300 cursor-default flex flex-col justify-between gap-3 overflow-hidden select-none"
+    >
+      {/* Dynamic Specular Metallic Sheen Highlight */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300 rounded-xl"
+        style={{
+          opacity: isHovered ? 1 : 0,
+          background: `radial-gradient(320px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.08), transparent 60%)`,
+        }}
+      />
+
+      <div className="relative z-10 flex items-center justify-between">
+        <span className="font-display font-semibold text-base text-typography-primary">
+          {item.name}
+        </span>
+        {item.badge && (
+          <span className="font-mono text-[10px] uppercase px-2 py-0.5 rounded bg-white/5 text-typography-muted border border-white/10">
+            {item.badge}
+          </span>
+        )}
+      </div>
+      <p className="relative z-10 text-xs text-typography-muted font-mono leading-relaxed">
+        {item.detail}
+      </p>
+    </div>
+  );
+};
+
 export const TechArsenal: React.FC = () => {
+  const row1Ref = useRef<HTMLDivElement>(null);
+  const row2Ref = useRef<HTMLDivElement>(null);
+  const prefersReduced = useReducedMotion();
+
+  useEffect(() => {
+    if (prefersReduced) return;
+
+    // Velocity-reactive acceleration on the marquee
+    const trigger = ScrollTrigger.create({
+      trigger: '#stack',
+      start: 'top bottom',
+      end: 'bottom top',
+      onUpdate: (self) => {
+        const velocity = Math.abs(self.getVelocity());
+        const speedMultiplier = 1 + Math.min(3, velocity / 600);
+
+        if (row1Ref.current) {
+          row1Ref.current.style.animationDuration = `${30 / speedMultiplier}s`;
+        }
+        if (row2Ref.current) {
+          row2Ref.current.style.animationDuration = `${35 / speedMultiplier}s`;
+        }
+      },
+    });
+
+    return () => trigger.kill();
+  }, [prefersReduced]);
 
   return (
     <section id="stack" className="py-28 md:py-36 px-4 sm:px-6 md:px-8 max-w-[1380px] w-[92%] mx-auto select-none">
@@ -72,12 +152,13 @@ export const TechArsenal: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-white/10">
         <div className="flex flex-col items-start gap-3">
           <div className="flex items-center gap-2 text-typography-muted font-mono text-xs uppercase tracking-widest">
-            <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>02 // ARSENAL &amp; PRODUCTION STACK</span>
           </div>
-          <h2 className="font-display font-bold text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.98] tracking-tight text-typography-primary uppercase">
-            Technical Arsenal
-          </h2>
+          <PerspectiveHeading
+            text="Technical Arsenal"
+            className="font-display font-bold text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.98] tracking-tight text-typography-primary uppercase"
+          />
         </div>
         <p className="text-typography-secondary text-base md:text-lg max-w-md leading-relaxed font-normal">
           A battle-tested spectrum of languages, frameworks, and engineering tools leveraged across client &amp; enterprise production.
@@ -104,41 +185,24 @@ export const TechArsenal: React.FC = () => {
               </p>
             </div>
 
-            {/* Tech Stack Items (Col 8) */}
-            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {/* Tech Stack Items (Col 8) with Interactive Metallic Sheen */}
+            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               {category.items.map((item) => (
-                <div
-                  key={item.name}
-                  className="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.06] hover:border-white/15 transition-all cursor-default flex flex-col justify-between gap-2"
-                >
-                    <div className="flex items-center justify-between">
-                      <span className="font-display font-semibold text-base text-typography-primary">
-                        {item.name}
-                      </span>
-                      {item.badge && (
-                        <span className="font-mono text-[10px] uppercase px-2 py-0.5 rounded bg-white/5 text-typography-muted border border-white/10">
-                          {item.badge}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-xs text-typography-muted font-mono leading-relaxed">
-                      {item.detail}
-                    </p>
-                  </div>
-                ))}
+                <SheenCard key={item.name} item={item} />
+              ))}
             </div>
           </div>
         ))}
       </div>
 
-      {/* Restrained Dual-Row Velocity Marquee */}
+      {/* Velocity-Reactive Dual-Row Kinetic Marquee */}
       <div className="relative overflow-hidden pt-12 select-none">
         <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-obsidian to-transparent z-10 pointer-events-none" />
         <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-obsidian to-transparent z-10 pointer-events-none" />
 
         <div className="flex flex-col gap-3">
           {/* Row 1 */}
-          <div className="flex gap-3 w-max animate-marquee">
+          <div ref={row1Ref} className="flex gap-3 w-max animate-marquee will-change-transform">
             {[...MARQUEE_ROW_1, ...MARQUEE_ROW_1, ...MARQUEE_ROW_1].map((tech, i) => (
               <div
                 key={`m1-${tech}-${i}`}
@@ -151,7 +215,7 @@ export const TechArsenal: React.FC = () => {
           </div>
 
           {/* Row 2 */}
-          <div className="flex gap-3 w-max animate-marquee-reverse">
+          <div ref={row2Ref} className="flex gap-3 w-max animate-marquee-reverse will-change-transform">
             {[...MARQUEE_ROW_2, ...MARQUEE_ROW_2, ...MARQUEE_ROW_2].map((tech, i) => (
               <div
                 key={`m2-${tech}-${i}`}
@@ -167,3 +231,5 @@ export const TechArsenal: React.FC = () => {
     </section>
   );
 };
+
+export default TechArsenal;

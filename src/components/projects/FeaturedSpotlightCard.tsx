@@ -11,6 +11,7 @@ export const FeaturedSpotlightCard: React.FC<FeaturedSpotlightCardProps> = ({ pr
   return (
     <div
       onClick={() => onSelect(project)}
+      data-cursor="explore"
       className="group col-span-12 mb-10 border border-white/10 rounded-2xl md:rounded-3xl bg-obsidian-surface overflow-hidden hover:border-white/20 transition-all duration-500 cursor-pointer shadow-subtle-elevation"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">

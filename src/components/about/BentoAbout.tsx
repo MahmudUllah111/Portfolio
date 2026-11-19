@@ -1,5 +1,7 @@
 import React from 'react';
 import { LiveDhakaClock } from './LiveDhakaClock';
+import { PhilosophyScrubReveal } from './PhilosophyScrubReveal';
+import { PerspectiveHeading } from '../common/PerspectiveHeading';
 
 export const BentoAbout: React.FC = () => {
   return (
@@ -8,17 +10,21 @@ export const BentoAbout: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-white/10">
         <div className="flex flex-col items-start gap-3">
           <div className="flex items-center gap-2 text-typography-muted font-mono text-xs uppercase tracking-widest">
-            <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>01 // PHILOSOPHY &amp; SYSTEMS CRAFT</span>
           </div>
-          <h2 className="font-display font-bold text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.98] tracking-tight text-typography-primary uppercase">
-            Engineering Philosophy
-          </h2>
+          <PerspectiveHeading
+            text="Engineering Philosophy"
+            className="font-display font-bold text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.98] tracking-tight text-typography-primary uppercase"
+          />
         </div>
         <p className="text-typography-secondary text-base md:text-lg max-w-md leading-relaxed font-normal">
           Bridging high-scale relational backend systems with tactile, 60fps interactive frontends.
         </p>
       </div>
+
+      {/* Scroll-Scrubbed Word-by-Word Reading Reveal (MotionSite / GSAP Vault signature) */}
+      <PhilosophyScrubReveal />
 
       {/* Open Architectural Grid (Hairline Dividers, No Dark Box Clutter) */}
       <div className="border-x border-b border-white/10">
@@ -36,7 +42,7 @@ export const BentoAbout: React.FC = () => {
               <h3 className="font-display font-semibold text-2xl md:text-4xl text-typography-primary tracking-tight">
                 High-Scale Relational Platforms &amp; Modular Systems
               </h3>
-              <p className="text-typography-secondary leading-relaxed text-base md:text-lg pt-2">
+              <p className="text-typography-secondary leading-relaxed text-base md:text-lg pt-2 font-normal">
                 Specialized in architecting web systems that balance deep backend robustness with responsive, fluid frontends. From normalized relational databases and bespoke media libraries to dynamic page widget engines, every layer is engineered for long-term scalability and zero operational drag.
               </p>
             </div>
@@ -93,7 +99,7 @@ export const BentoAbout: React.FC = () => {
               <h4 className="font-display font-semibold text-xl text-typography-primary">
                 Dynamic CMS Architecture
               </h4>
-              <p className="text-sm text-typography-secondary leading-relaxed">
+              <p className="text-sm text-typography-secondary leading-relaxed font-normal">
                 Building custom media libraries with folder hierarchy, asset transforms, and drag-and-drop block layout engines giving non-technical teams effortless publishing autonomy.
               </p>
             </div>
@@ -115,7 +121,7 @@ export const BentoAbout: React.FC = () => {
               <h4 className="font-display font-semibold text-xl text-typography-primary">
                 Embedded AI &amp; Robotics
               </h4>
-              <p className="text-sm text-typography-secondary leading-relaxed">
+              <p className="text-sm text-typography-secondary leading-relaxed font-normal">
                 From developing CANDI (bilingual educational robot with NLP and hardware kinematics) to edge computer vision at SK IT Centre, applying machine intelligence to real-world software.
               </p>
             </div>
@@ -151,3 +157,5 @@ export const BentoAbout: React.FC = () => {
     </section>
   );
 };
+
+export default BentoAbout;

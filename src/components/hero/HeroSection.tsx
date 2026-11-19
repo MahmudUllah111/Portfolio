@@ -4,6 +4,8 @@ import { ArrowDown, Github } from 'lucide-react';
 import { StatusIndicator } from './StatusIndicator';
 import { MagneticButton } from '../common/MagneticButton';
 import { useLenis } from '../../hooks/useLenis';
+import { HeroScene3D } from '../canvas/HeroScene3D';
+import { PerspectiveHeading } from '../common/PerspectiveHeading';
 
 export const HeroSection: React.FC = () => {
   const { scrollTo } = useLenis();
@@ -29,23 +31,28 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-[100dvh] flex flex-col justify-between pt-28 md:pt-36 pb-12 px-4 sm:px-6 md:px-8 max-w-[1380px] w-[92%] mx-auto select-none"
+      className="relative min-h-[100dvh] flex flex-col justify-between pt-28 md:pt-36 pb-12 px-4 sm:px-6 md:px-8 max-w-[1380px] w-[92%] mx-auto select-none overflow-hidden"
     >
+      {/* Real Interactive 3D WebGL Sculpture Layer (MotionSite / GSAP Vault grade) */}
+      <HeroScene3D />
+
       {/* Top Editorial Telemetry Bar */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 border-b border-white/10 font-mono text-xs text-typography-muted"
+        className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 border-b border-white/10 font-mono text-xs text-typography-muted"
       >
         <div className="flex items-center gap-2 text-typography-primary">
-          <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
-          <span className="uppercase tracking-widest font-semibold">FULL-STACK ENGINEER &amp; SYSTEMS ARCHITECT</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="uppercase tracking-widest font-semibold">
+            FULL-STACK ENGINEER &amp; SYSTEMS ARCHITECT
+          </span>
         </div>
 
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-white/40" />
             <span className="text-typography-secondary font-medium">
               DHAKA, BD — {liveTime || '12:00:00 PM'} (UTC+6)
             </span>
@@ -57,8 +64,8 @@ export const HeroSection: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Main Full-Width Editorial Typography Moment */}
-      <div className="my-auto py-12 md:py-20 flex flex-col items-start gap-8 max-w-5xl">
+      {/* Main Full-Width Editorial Typography Moment with 3D Perspective */}
+      <div className="relative z-10 my-auto py-12 md:py-20 flex flex-col items-start gap-8 max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -67,24 +74,22 @@ export const HeroSection: React.FC = () => {
           <StatusIndicator />
         </motion.div>
 
-        {/* Massive, Razor-Sharp Off-White Headline (Zero AI Gradient Text) */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-1"
-        >
-          <h1 className="font-display font-extrabold text-[clamp(3.5rem,8.5vw,8.5rem)] leading-[0.92] tracking-[-0.04em] text-typography-primary uppercase">
-            A.F.M Mahmud <br />
-            <span className="text-typography-primary">Ullah</span>
-          </h1>
-        </motion.div>
+        {/* 3D Perspective Split-Text Animated Headline (Zero AI Gradient Text) */}
+        <div className="space-y-1">
+          <PerspectiveHeading
+            as="h1"
+            text="A.F.M Mahmud Ullah"
+            triggerOnScroll={false}
+            delay={0.15}
+            className="font-display font-extrabold text-[clamp(3.5rem,8.5vw,8.5rem)] leading-[0.92] tracking-[-0.04em] text-typography-primary uppercase"
+          />
+        </div>
 
         {/* Crisp Editorial Subtext */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="text-lg sm:text-xl md:text-2xl text-typography-secondary leading-relaxed max-w-[62ch] font-normal"
         >
           Specialized in high-scale relational web architectures, custom modular CMS engines, and 60fps editorial interfaces built with production rigor.
@@ -94,7 +99,7 @@ export const HeroSection: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-wrap items-center gap-4 pt-4"
         >
           <MagneticButton
@@ -122,30 +127,43 @@ export const HeroSection: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Bottom Editorial Meta Bar */}
+      {/* Bottom Architectural Metadata Bar */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="flex items-center justify-between pt-8 border-t border-white/10 font-mono text-xs text-typography-muted"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.55 }}
+        className="relative z-10 pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-6 font-mono text-xs text-typography-muted"
       >
-        <div className="flex items-center gap-6">
-          <span>LAT 23.8103° N // LON 90.4125° E</span>
-          <span className="hidden sm:inline">·</span>
-          <span className="hidden sm:inline text-typography-secondary">
-            LARAVEL / REACT / TYPESCRIPT / INERTIA
+        <div className="flex flex-col gap-1">
+          <span className="uppercase text-typography-secondary font-medium tracking-wider">
+            01 // ARCHITECTURE
+          </span>
+          <span className="text-typography-muted">
+            Relational DBs, Custom CMS &amp; REST APIs
           </span>
         </div>
 
-        <button
-          onClick={() => scrollTo('#about', { offset: -30 })}
-          className="flex items-center gap-2 text-typography-secondary hover:text-typography-primary transition-colors group cursor-pointer"
-          aria-label="Scroll to about section"
-        >
-          <span className="uppercase tracking-widest text-[11px]">SCROLL TO EXPLORE</span>
-          <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-1 transition-transform duration-300" strokeWidth={1.5} />
-        </button>
+        <div className="flex flex-col gap-1">
+          <span className="uppercase text-typography-secondary font-medium tracking-wider">
+            02 // RELATIONAL SCALE
+          </span>
+          <span className="text-typography-muted">
+            Enterprise Platforms &amp; Cultural Archives
+          </span>
+        </div>
+
+        <div className="flex flex-col gap-1 sm:items-end justify-between">
+          <button
+            onClick={() => scrollTo('#about', { offset: -30 })}
+            className="flex items-center gap-2 text-typography-primary hover:text-white transition-colors cursor-pointer group"
+          >
+            <span className="uppercase tracking-wider font-semibold">DISCOVER SYSTEMS PHILOSOPHY</span>
+            <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-1 transition-transform" />
+          </button>
+        </div>
       </motion.div>
     </section>
   );
 };
+
+export default HeroSection;

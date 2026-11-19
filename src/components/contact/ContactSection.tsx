@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Copy, Check, Github, Linkedin, MessageSquare } from 'lucide-react';
 import { ContactForm } from './ContactForm';
 import { useToast } from '../common/Toast';
+import { PerspectiveHeading } from '../common/PerspectiveHeading';
 
 export const ContactSection: React.FC = () => {
   const { showToast } = useToast();
@@ -21,13 +22,13 @@ export const ContactSection: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-white/10 mb-12">
         <div className="flex flex-col items-start gap-4">
           <div className="flex items-center gap-2 text-typography-muted font-mono text-xs uppercase tracking-widest">
-            <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>05 // INITIATE TRANSMISSION &amp; CONTACT</span>
           </div>
-          <h2 className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] leading-[0.94] tracking-tight text-typography-primary uppercase">
-            Let&apos;s build something <br />
-            <span className="text-typography-primary">extraordinary.</span>
-          </h2>
+          <PerspectiveHeading
+            text="Let's build something extraordinary"
+            className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] leading-[0.94] tracking-tight text-typography-primary uppercase"
+          />
         </div>
         <p className="text-typography-secondary text-base md:text-lg max-w-md leading-relaxed font-normal">
           Whether you need a high-scale full-stack web platform, custom modular CMS architecture, or high-performance frontend engineering, let&apos;s discuss your vision.
